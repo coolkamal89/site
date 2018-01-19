@@ -11,18 +11,19 @@ app.get('/', (req, res) => {
 	res.send(`Hello Heroku App! The current time is ${date}`);
 });
 
-app.all('/hook', (req, res) => {
-	console.log(req.body, req.query);
-	if (req.body.message) {
-		var message = req.body.message;
-		var message_id = message.message_id;
-		var chat_id = message.chat.id;
+app.post('/hook', (req, res) => {
+	console.log(req.body);
+	res.send(req.body);
+	// if (req.body.message) {
+	// 	var message = req.body.message;
+	// 	var message_id = message.message_id;
+	// 	var chat_id = message.chat.id;
 
-		if (message.text) {
-			var text = message.text;
-			res.send({ method: 'sendMessage', chat_id: chat_id, text: 'Hello' });
-		}
-	}
+	// 	if (message.text) {
+	// 		var text = message.text;
+	// 		res.send({ method: 'sendMessage', chat_id: chat_id, text: 'Hello' });
+	// 	}
+	// }
 });
 
 app.listen(PORT, () => {
