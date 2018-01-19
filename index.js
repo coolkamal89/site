@@ -12,7 +12,11 @@ var quizEntries = [
 
 function getQues(chat_id) {
 	const ques = quizEntries[0];
-	return `${ques.q}\n\nA. ${ques.a1}\nB. ${ques.a2}\nC. ${ques.a3}\nD. ${ques.a4}`
+	
+	return {
+		raw: ques,
+		text: `${ques.q}\n\nA. ${ques.a1}\nB. ${ques.a2}\nC. ${ques.a3}\nD. ${ques.a4}`
+	}
 }
 
 const app = express();
@@ -55,19 +59,21 @@ app.post('/hook', (req, res) => {
 			}
 
 			else if (text.indexOf('/start') >= 0) {
+
+				// Shuffle the questions and store against the user
 				var ques = getQues(chat_id);
 
-				memory.threads.chat_id = {
+				memory.threads[chat_id] = {
 					user_name: user_name,
 					questions: [],
 					score: 0,
-					current_ques: ques
+					current_ques: ques.text
 				}
 
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: `Hi ${user_name}, let\'s start with the quiz.\n\n${ques}`,
+					text: `Hi ${user_name}, let\'s start with the quiz.\n\n${ques.text}`,
 					reply_markup: {
 						'keyboard': [['A', 'B'], ['C', 'D']],
 						'one_time_keyboard': true,
@@ -78,7 +84,7 @@ app.post('/hook', (req, res) => {
 			}
 
 			else if (text.indexOf('/stop') >= 0) {
-				delete memory.threads.chat_id;
+				delete memory.threads[chat_id];
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
@@ -90,7 +96,7 @@ app.post('/hook', (req, res) => {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: `Hi ${user_name}, your score is ${memory.threads.chat_id.score}.`
+					text: `Hi ${user_name}, your score is ${memory.threads[chat_id].score}.`
 				});
 			}
 
@@ -98,7 +104,7 @@ app.post('/hook', (req, res) => {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: JSON.stringify(memory.threads.chat_id.current_ques)
+					text: JSON.stringify(memory.threads[chat_id].current_ques)
 				});
 			}
 		}
