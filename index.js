@@ -31,7 +31,17 @@ app.post('/hook', (req, res) => {
 			var text = message.text;
 
 			if (text.indexOf('/help') >= 0) {
-				res.send({ method: 'sendMessage', chat_id: chat_id, text: 'This is the help screen.' });
+				res.send({
+					method: 'sendMessage',
+					chat_id: chat_id,
+					text:
+						'Welcome to the QuizBot.\n' +
+						'You can select the below options:' +
+						'/start - To start the quiz' +
+						'/stop - To stop the quiz' +
+						'/help - To get help regarding the quiz' +
+						'/score - To get your current score'
+				});
 			}
 
 			else if (text.indexOf('/start') >= 0) {
@@ -40,7 +50,7 @@ app.post('/hook', (req, res) => {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: 'Hi ${user_name}, let\'s start with the quiz.\n\n' + ques,
+					text: `Hi ${user_name}, let\'s start with the quiz.\n\n${ques}`,
 					reply_markup: {
 						'keyboard': [['A', 'B'], ['C', 'D']],
 						'one_time_keyboard': true,
