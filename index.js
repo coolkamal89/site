@@ -9,11 +9,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/hook', (req, res) => {
-	console.log({ req.body, req.query });
+	console.log(req.body, req.query);
 	res.send('Hello World!');
 });
 
 app.post('/hook', (req, res) => {
+	console.log(req.body, req.query);
 	if (req.body.message) {
 		var message = req.body.message;
 		var message_id = message.message_id;
