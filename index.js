@@ -23,6 +23,7 @@ app.post('/hook', (req, res) => {
 		console.log(req.body);
 		var message = req.body.message;
 		var chat_id = message.chat.id;
+		var user_name = (message.from.first_name !== '' ? message.from.first_name : 'Guest');
 
 		if (message.text) {
 			var text = message.text;
@@ -34,31 +35,18 @@ app.post('/hook', (req, res) => {
 			else if (text.indexOf('/start') >= 0) {
 				var ques = getQues(chat_id);
 
-				var ques_form = ques.q + '\n\n';
-				// ques_form += 'A. ' + ques.a1 + '\n';
-				// ques_form += 'B. ' + ques.a2 + '\n';
-				// ques_form += 'C. ' + ques.a3 + '\n';
-				// ques_form += 'D. ' + ques.a4 + '\n';
-
-				// res.send({
-				// 	method: 'sendMessage',
-				// 	chat_id: chat_id,
-				// 	text: 'Let\'s start with the quiz.\n\n' + ques_form,
-				// 	reply_markup: {
-				//         'keyboard': [['A', 'B', 'C', 'D']],
-				//         'one_time_keyboard': true,
-				//         'resize_keyboard': true,
-				//         'remove_keyboard': true
-				//     }
-				// });
+				var ques_form = `${ques.q}\n\nA. ${ques.a1}\nB. ${ques.a1}\nC. ${ques.a1}\nD. ${ques.a1}`;
 
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
 					text: 'Let\'s start with the quiz.\n\n' + ques_form,
 					reply_markup: {
-				        'inline_keyboard': [[{ text: ques.a1 }], [{ text: ques.a2 }], [{ text: ques.a3 }], [{ text: ques.a4 }]]
-				    }
+						'keyboard': [['A', 'B', 'C', 'D']],
+						'one_time_keyboard': true,
+						'resize_keyboard': true,
+						'remove_keyboard': true
+					}
 				});
 			}
 
