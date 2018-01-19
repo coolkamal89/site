@@ -40,7 +40,7 @@ app.post('/hook', (req, res) => {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: 'Let\'s start with the quiz.\n\n' + ques,
+					text: 'Hi ${user_name}, let\'s start with the quiz.\n\n' + ques,
 					reply_markup: {
 						'keyboard': [['A', 'B'], ['C', 'D']],
 						'one_time_keyboard': true,
