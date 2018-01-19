@@ -30,7 +30,7 @@ app.post('/hook', (req, res) => {
 				res.send({ method: 'sendMessage', chat_id: chat_id, text: 'This is the help screen.' });
 			}
 
-			else if (text.indexOf('/start/') >= 0) {
+			else if (text.indexOf('/start') >= 0) {
 				var ques = getQues(chat_id);
 
 				var ques_form = ques.q;
@@ -49,6 +49,10 @@ app.post('/hook', (req, res) => {
 				        'resize_keyboard': true
 				    }
 				});
+			}
+
+			else if (text.indexOf('/stop') >= 0) {
+				res.send({ method: 'sendMessage', chat_id: chat_id, text: 'Let\'s stop the quiz.' });
 			}
 
 			else {
