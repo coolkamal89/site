@@ -5,7 +5,7 @@ const app = express();
 
 app.get('/', (req, res) => {
 	const date = new Date().toString();
-	res.send('Hello Heroku App! The current time is ${date}');
+	res.send(`Hello Heroku App! The current time is ${date}`);
 });
 
 app.listen(PORT, () => {
