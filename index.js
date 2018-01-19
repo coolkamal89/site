@@ -98,7 +98,7 @@ app.post('/hook', (req, res) => {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: JSON.stringify(memory.threads.chat_id.current_ques);
+					text: JSON.stringify(memory.threads.chat_id.current_ques)
 				});
 			}
 		}
