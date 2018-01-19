@@ -7,7 +7,8 @@ var quizEntries = [
 ];
 
 function getQues(chat_id) {
-	return quizEntries[0];
+	const ques = quizEntries[0];
+	return `${ques.q}\n\nA. ${ques.a1}\nB. ${ques.a2}\nC. ${ques.a3}\nD. ${ques.a4}`
 }
 
 const app = express();
@@ -19,8 +20,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/hook', (req, res) => {
-	if (req.body && req.body.message) {
-		console.log(req.body);
+	console.log(req.body);
+
+	if (req.body.message) {
 		var message = req.body.message;
 		var chat_id = message.chat.id;
 		var user_name = (message.from.first_name !== '' ? message.from.first_name : 'Guest');
@@ -35,14 +37,12 @@ app.post('/hook', (req, res) => {
 			else if (text.indexOf('/start') >= 0) {
 				var ques = getQues(chat_id);
 
-				var ques_form = `${ques.q}\n\nA. ${ques.a1}\nB. ${ques.a1}\nC. ${ques.a1}\nD. ${ques.a1}`;
-
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: 'Let\'s start with the quiz.\n\n' + ques_form,
+					text: 'Let\'s start with the quiz.\n\n' + ques,
 					reply_markup: {
-						'keyboard': [['A', 'B', 'C', 'D']],
+						'keyboard': [['A', 'B'], ['C', 'D']],
 						'one_time_keyboard': true,
 						'resize_keyboard': true,
 						'remove_keyboard': true
