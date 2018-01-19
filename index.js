@@ -8,6 +8,11 @@ app.get('/', (req, res) => {
 	res.send(`Hello Heroku App! The current time is ${date}`);
 });
 
+app.get('/hook', (req, res) => {
+	console.log('/hook GET route');
+	res.send('/hook GET route');
+});
+
 app.post('/hook', (req, res) => {
 	console.log(req.body);
 	res.send({
