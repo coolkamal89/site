@@ -2,6 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
 
+memory = {
+	threads: {}
+};
+
 var quizEntries = [
 	{ qid: 1, q: 'What is 1 + 1?', a1: '1', a2: '2', a3: '3', a4: '4', c: 'a1' }
 ];
@@ -17,6 +21,12 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
 	const date = new Date().toString();
 	res.send(`Hello Heroku App! The current time is ${date}`);
+});
+
+app.get('/stats', (req, res) => {
+	res.send({
+		memory: memory
+	});
 });
 
 app.post('/hook', (req, res) => {
@@ -47,6 +57,13 @@ app.post('/hook', (req, res) => {
 			else if (text.indexOf('/start') >= 0) {
 				var ques = getQues(chat_id);
 
+				memory.threads.chat_id = {
+					user_name: user_name,
+					questions: [];
+					score: 0
+					current_ques: ques
+				}
+
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
@@ -68,11 +85,19 @@ app.post('/hook', (req, res) => {
 				});
 			}
 
+			else if (text.indexOf('/score') >= 0) {
+				res.send({
+					method: 'sendMessage',
+					chat_id: chat_id,
+					text: `Hi ${user_name}, your score is ${memory.threads.chat_id.score}.`
+				});
+			}
+
 			else {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: 'Hello'
+					text: JSON.stringify(memory.threads.chat_id.current_ques);
 				});
 			}
 		}
