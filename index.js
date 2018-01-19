@@ -9,10 +9,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/hook', (req, res) => {
+	console.log(req.body);
 	res.send({
 		success: true
 	});
-	console.log(req.body);
 });
 
 app.listen(PORT, () => {
