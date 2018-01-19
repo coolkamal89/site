@@ -12,7 +12,7 @@ app.get('/hook', (req, res) => {
 	res.send({
 		success: true
 	});
-	console.log(req);
+	console.log(req.body);
 });
 
 app.listen(PORT, () => {
