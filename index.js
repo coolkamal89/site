@@ -34,20 +34,29 @@ app.post('/hook', (req, res) => {
 				var ques = getQues(chat_id);
 
 				var ques_form = ques.q + '\n\n';
-				ques_form += 'A. ' + ques.a1 + '\n';
-				ques_form += 'B. ' + ques.a2 + '\n';
-				ques_form += 'C. ' + ques.a3 + '\n';
-				ques_form += 'D. ' + ques.a4 + '\n';
+				// ques_form += 'A. ' + ques.a1 + '\n';
+				// ques_form += 'B. ' + ques.a2 + '\n';
+				// ques_form += 'C. ' + ques.a3 + '\n';
+				// ques_form += 'D. ' + ques.a4 + '\n';
+
+				// res.send({
+				// 	method: 'sendMessage',
+				// 	chat_id: chat_id,
+				// 	text: 'Let\'s start with the quiz.\n\n' + ques_form,
+				// 	reply_markup: {
+				//         'keyboard': [['A', 'B', 'C', 'D']],
+				//         'one_time_keyboard': true,
+				//         'resize_keyboard': true,
+				//         'remove_keyboard': true
+				//     }
+				// });
 
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
 					text: 'Let\'s start with the quiz.\n\n' + ques_form,
 					reply_markup: {
-				        'keyboard': [['A', 'B', 'C', 'D']],
-				        'one_time_keyboard': true,
-				        'resize_keyboard': true,
-				        'remove_keyboard': true
+				        'keyboard': [{ text: ques.a1 }, { text: ques.a2 }, { text: ques.a3 }, { text: ques.a4 }]
 				    }
 				});
 			}
