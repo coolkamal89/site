@@ -7,12 +7,31 @@ memory = {
 };
 
 var quizEntries = [
-	{ qid: 1, q: 'What is 1 + 1?', a1: '1', a2: '2', a3: '3', a4: '4', c: 'a1' }
+	{ qid: 1, q: 'What is the capital of India?', a1: 'Mumbai', a2: 'Delhi', a3: 'Kolkata', a4: 'Chennai', c: 'a2' }
+	{ qid: 2, q: 'Who wrote Julius Caeser?', a1: 'William Shakespeare', a2: 'Omprakash Mishra', a3: 'Dhinchak Pooja', a4: 'Dinesh Yadav', c: 'a1' },
+	{ qid: 3, q: 'What is the curreny in Japan', a1: 'Yen', a2: 'Rupee', a3: 'Dollars', a4: 'Pounds', c: 'a1' }
 ];
 
-function getQues(chat_id) {
-	const ques = quizEntries[0];
-	
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+function getQues(ques) {
 	return {
 		raw: ques,
 		text: `${ques.q}\n\nA. ${ques.a1}\nB. ${ques.a2}\nC. ${ques.a3}\nD. ${ques.a4}`
@@ -60,14 +79,18 @@ app.post('/hook', (req, res) => {
 
 			else if (text.indexOf('/start') >= 0) {
 
-				// Shuffle the questions and store against the user
-				var ques = getQues(chat_id);
+				// Shuffle the questions
+				var user_ques = shuffle(quizEntries);
 
+				// Throw the first question to the user
+				var ques = getQues(user_ques[0]);
+
+				// Store the details against the user
 				memory.threads[chat_id] = {
 					user_name: user_name,
-					questions: [],
+					questions: user_ques,
 					score: 0,
-					current_ques: ques.text
+					current_ques: ques.raw
 				}
 
 				res.send({
