@@ -59,8 +59,8 @@ app.post('/hook', (req, res) => {
 
 				memory.threads.chat_id = {
 					user_name: user_name,
-					questions: [];
-					score: 0
+					questions: [],
+					score: 0,
 					current_ques: ques
 				}
 
