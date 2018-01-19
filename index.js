@@ -57,17 +57,25 @@ app.post('/hook', (req, res) => {
 					chat_id: chat_id,
 					text: 'Let\'s start with the quiz.\n\n' + ques_form,
 					reply_markup: {
-				        'inline_keyboard': [{ text: ques.a1 }, { text: ques.a2 }, { text: ques.a3 }, { text: ques.a4 }]
+				        'inline_keyboard': [[{ text: ques.a1 }], [{ text: ques.a2 }], [{ text: ques.a3 }], [{ text: ques.a4 }]]
 				    }
 				});
 			}
 
 			else if (text.indexOf('/stop') >= 0) {
-				res.send({ method: 'sendMessage', chat_id: chat_id, text: 'Let\'s stop the quiz.' });
+				res.send({
+					method: 'sendMessage',
+					chat_id: chat_id,
+					text: 'Let\'s stop the quiz.'
+				});
 			}
 
 			else {
-				res.send({ method: 'sendMessage', chat_id: chat_id, text: 'Hello' });
+				res.send({
+					method: 'sendMessage',
+					chat_id: chat_id,
+					text: 'Hello'
+				});
 			}
 		}
 	}
