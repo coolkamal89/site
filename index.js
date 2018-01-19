@@ -86,6 +86,7 @@ app.post('/hook', (req, res) => {
 				var ques = getQues(user_ques[0]);
 
 				// Store the details against the user
+				// TODO: Just store the question ids in the array
 				memory.threads[chat_id] = {
 					user_name: user_name,
 					questions: user_ques,
