@@ -44,7 +44,7 @@ app.post('/hook', (req, res) => {
 					chat_id: chat_id,
 					text: 'Let\'s start with the quiz.\n\n' + ques_form,
 					reply_markup: {
-				        'keyboard' => [['1', '2', '3', '4']],
+				        'keyboard': [['1', '2', '3', '4']],
 				        'one_time_keyboard': true,
 				        'resize_keyboard': true
 				    }
