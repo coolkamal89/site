@@ -111,7 +111,7 @@ app.post('/hook', (req, res) => {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: 'Thank you for playing QuizBot. I hope you enjoyed.'
+					text: 'Thank you for playing QuizBot. Hope you enjoyed.'
 				});
 			}
 
