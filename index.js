@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 	res.send(`Hello Heroku App! The current time is ${date}`);
 });
 
-app.all('/hook', (req, res) => {
+app.post('/hook', (req, res) => {
 	console.log(req.body, req.query);
 	if (req.body.message) {
 		var message = req.body.message;
