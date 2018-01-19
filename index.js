@@ -7,7 +7,7 @@ memory = {
 };
 
 var quizEntries = [
-	{ qid: 1, q: 'What is the capital of India?', a1: 'Mumbai', a2: 'Delhi', a3: 'Kolkata', a4: 'Chennai', c: 'a2' }
+	{ qid: 1, q: 'What is the capital of India?', a1: 'Mumbai', a2: 'Delhi', a3: 'Kolkata', a4: 'Chennai', c: 'a2' },
 	{ qid: 2, q: 'Who wrote Julius Caeser?', a1: 'William Shakespeare', a2: 'Omprakash Mishra', a3: 'Dhinchak Pooja', a4: 'Dinesh Yadav', c: 'a1' },
 	{ qid: 3, q: 'What is the curreny in Japan', a1: 'Yen', a2: 'Rupee', a3: 'Dollars', a4: 'Pounds', c: 'a1' }
 ];
