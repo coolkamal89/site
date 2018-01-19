@@ -46,7 +46,8 @@ app.post('/hook', (req, res) => {
 					reply_markup: {
 				        'keyboard': [['A', 'B', 'C', 'D']],
 				        'one_time_keyboard': true,
-				        'resize_keyboard': true
+				        'resize_keyboard': true,
+				        'remove_keyboard': true
 				    }
 				});
 			}
