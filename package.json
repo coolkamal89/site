@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "name": "kamal-site",
+  "version": "1.0.0",
+  "description": "Kamal's test heroku app",
   "engines": {
     "node": "8.9.1"
   },
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/coolkamal89/site"
   },
   "keywords": [],
   "license": "MIT"

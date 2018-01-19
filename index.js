@@ -1,8 +1,12 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+const express = require('express');
+var PORT = process.env.PORT || 5000;
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .get('/', (req, res) => res.send("Hello World! - " + PORT))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+var app = express();
+
+app.get('/', (req, res) => {
+	res.send('Hello Heroku App!');
+});
+
+app.listen(PORT, () => {
+	console.log(`Listening on ${PORT}`);
+});
