@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
 
 var quizEntries = [
-	{ q: "What is 1 + 1?", a1: "", a2: "", a3: "", a4: "", c: "ans1" }
+	{ q: 'What is 1 + 1?', a1: '1', a2: '2', a3: '3', a4: '4', c: 'a1' }
 ];
 
 function getQues(chat_id) {
@@ -33,18 +33,18 @@ app.post('/hook', (req, res) => {
 			else if (text.indexOf('/start') >= 0) {
 				var ques = getQues(chat_id);
 
-				var ques_form = ques.q;
-				ques_form += '1. ' + ques.a1 + '\n';
-				ques_form += '2. ' + ques.a2 + '\n';
-				ques_form += '3. ' + ques.a3 + '\n';
-				ques_form += '4. ' + ques.a4 + '\n';
+				var ques_form = ques.q + '\n\n';
+				ques_form += 'A. ' + ques.a1 + '\n';
+				ques_form += 'B. ' + ques.a2 + '\n';
+				ques_form += 'C. ' + ques.a3 + '\n';
+				ques_form += 'D. ' + ques.a4 + '\n';
 
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
 					text: 'Let\'s start with the quiz.\n\n' + ques_form,
 					reply_markup: {
-				        'keyboard': [['1', '2', '3', '4']],
+				        'keyboard': [['A', 'B', 'C', 'D']],
 				        'one_time_keyboard': true,
 				        'resize_keyboard': true
 				    }
