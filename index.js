@@ -9,8 +9,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/hook', (req, res) => {
-	console.log('/hook GET route');
-	res.send('/hook GET route');
+	console.log({ req.body, req.query });
+	res.send('Hello World!');
 });
 
 app.post('/hook', (req, res) => {
@@ -21,9 +21,7 @@ app.post('/hook', (req, res) => {
 
 		if (message.text) {
 			var text = message.text;
-			var response = apiRequestWebhook('sendMessage', { chat_id: chat_id, text: 'Hello' });
-			
-			res.send(response);
+			res.send({ method: 'sendMessage', chat_id: chat_id, text: 'Hello' });
 		}
 	}
 });
@@ -31,13 +29,3 @@ app.post('/hook', (req, res) => {
 app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
 });
-
-function apiRequestWebhook(method, parameters) {
-	if (!parameters) {
-		parameters = {};
-	}
-
-	parameters.method = method;
-
-	return parameters;
-}
