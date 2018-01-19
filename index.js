@@ -36,10 +36,10 @@ app.post('/hook', (req, res) => {
 					chat_id: chat_id,
 					text:
 						'Welcome to the QuizBot.\n' +
-						'You can select the below options:' +
-						'/start - To start the quiz' +
-						'/stop - To stop the quiz' +
-						'/help - To get help regarding the quiz' +
+						'You can select the below options:\n\n' +
+						'/start - To start the quiz\n' +
+						'/stop - To stop the quiz\n' +
+						'/help - To get help regarding the quiz\n' +
 						'/score - To get your current score'
 				});
 			}
