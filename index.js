@@ -78,10 +78,11 @@ app.post('/hook', (req, res) => {
 			}
 
 			else if (text.indexOf('/stop') >= 0) {
+				delete memory.threads.chat_id;
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
-					text: 'Let\'s stop the quiz.'
+					text: 'Thank you for playing QuizBot. I hope you enjoyed.'
 				});
 			}
 
