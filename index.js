@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.post('/hook', (req, res) => {
 	if (req.body && req.body.message) {
+		console.log(req.body);
 		var message = req.body.message;
 		var chat_id = message.chat.id;
 
