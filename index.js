@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
 
 var quizEntries = [
-	{ q: 'What is 1 + 1?', a1: '1', a2: '2', a3: '3', a4: '4', c: 'a1' }
+	{ qid: 1, q: 'What is 1 + 1?', a1: '1', a2: '2', a3: '3', a4: '4', c: 'a1' }
 ];
 
 function getQues(chat_id) {
@@ -46,8 +46,7 @@ app.post('/hook', (req, res) => {
 					reply_markup: {
 				        'inline_keyboard': [['A', 'B', 'C', 'D']],
 				        'one_time_keyboard': true,
-				        'resize_keyboard': true,
-				        'remove_keyboard': true
+				        'resize_keyboard': true
 				    }
 				});
 			}
