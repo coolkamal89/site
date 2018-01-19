@@ -8,6 +8,13 @@ app.get('/', (req, res) => {
 	res.send(`Hello Heroku App! The current time is ${date}`);
 });
 
+app.get('/hook', (req, res) => {
+	res.send({
+		success: true
+	});
+	console.log(req);
+});
+
 app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
 });
