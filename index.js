@@ -124,6 +124,14 @@ app.post('/hook', (req, res) => {
 				});
 			}
 
+			else if (text.indexOf('/stats') >= 0) {
+				res.send({
+					method: 'sendMessage',
+					chat_id: chat_id,
+					text: JSON.stringify(memory.threads[chat_id], null, 2)
+				});
+			}
+
 			else {
 				res.send({
 					method: 'sendMessage',
