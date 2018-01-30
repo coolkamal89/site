@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
 
 memory = {
+	questions: quizEntries,
 	threads: {}
 };
 
@@ -73,7 +74,8 @@ app.post('/hook', (req, res) => {
 						'/start - To start the quiz\n' +
 						'/stop - To stop the quiz\n' +
 						'/help - To get help regarding the quiz\n' +
-						'/score - To get your current score'
+						'/score - To get your current score\n' +
+						'/current_question - To get the current question'
 				});
 			}
 
@@ -132,12 +134,28 @@ app.post('/hook', (req, res) => {
 				});
 			}
 
-			else {
+			else if (text.indexOf('/stats') >= 0) {
 				res.send({
 					method: 'sendMessage',
 					chat_id: chat_id,
 					text: JSON.stringify(memory.threads[chat_id].current_ques)
 				});
+			}
+
+			else {
+				if (['A', 'B', 'C', 'D'].includes(text)) {
+					res.send({
+						method: 'sendMessage',
+						chat_id: chat_id,
+						text: 'Question Option'
+					});
+				} else {
+					res.send({
+						method: 'sendMessage',
+						chat_id: chat_id,
+						text: 'Other response'
+					});
+				}
 			}
 		}
 	}
