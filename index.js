@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
+const https = require('https');
 
 memory = {
 	questions: quizEntries,
@@ -41,6 +42,17 @@ function getQues(ques) {
 
 const app = express();
 app.use(bodyParser.json());
+
+app.get('/stocks/getQuota/:symbol', (req, res) => {
+	https.get({
+		hostname: 'www1.nseindia.com',
+		port: 80,
+		path: '/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + req.params.symbol,
+		agent: false
+	}, (data) => {
+		res.send(data);
+	});
+});
 
 app.get('/', (req, res) => {
 	const date = new Date().toString();
