@@ -43,8 +43,8 @@ function getQues(ques) {
 const app = express();
 app.use(bodyParser.json());
 
-app.get('/stocks/getQuota/:symbol', (req, res) => {
-	res.send("hello");
+app.get('/stocks/quote/:symbol', (req, res) => {
+	res.send(req.params.symbol);
 	/*
 	https.get('https://encrypted.google.com/', (res) => {
 		console.log('statusCode:', res.statusCode);
