@@ -44,6 +44,8 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/stocks/getQuota/:symbol', (req, res) => {
+	res.send("hello");
+	/*
 	https.get('https://encrypted.google.com/', (res) => {
 		console.log('statusCode:', res.statusCode);
 		console.log('headers:', res.headers);
@@ -56,6 +58,7 @@ app.get('/stocks/getQuota/:symbol', (req, res) => {
 			console.error(e);
 		});
 	});
+	*/
 });
 
 app.get('/', (req, res) => {
