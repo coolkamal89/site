@@ -44,21 +44,16 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/stocks/quote/:symbol', (req, res) => {
-	res.send(req.params.symbol);
-	/*
-	https.get('https://encrypted.google.com/', (res) => {
-		console.log('statusCode:', res.statusCode);
-		console.log('headers:', res.headers);
+	https.get('https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + req.params.symbol, (res) => {
+		// console.log('statusCode:', res.statusCode);
+		// console.log('headers:', res.headers);
 
 		res.on('data', (d) => {
 			res.send(d);
-		});
-
 		}).on('error', (e) => {
 			console.error(e);
 		});
 	});
-	*/
 });
 
 app.get('/', (req, res) => {
