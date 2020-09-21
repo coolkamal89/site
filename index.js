@@ -44,13 +44,17 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/stocks/getQuota/:symbol', (req, res) => {
-	https.get({
-		hostname: 'www1.nseindia.com',
-		port: 80,
-		path: '/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + req.params.symbol,
-		agent: false
-	}, (data) => {
-		res.send(data);
+	https.get('https://encrypted.google.com/', (res) => {
+		console.log('statusCode:', res.statusCode);
+		console.log('headers:', res.headers);
+
+		res.on('data', (d) => {
+			res.send(d);
+		});
+
+		}).on('error', (e) => {
+			console.error(e);
+		});
 	});
 });
 
